@@ -181,13 +181,8 @@ Each test script writes a trace to `/traces/` for inspection.
 
 ---
 
-## 👤 Solo Build
 
-Built end-to-end by **[YOUR NAME HERE]**
-- Email: [YOUR_EMAIL]
-- LinkedIn: [YOUR_LINKEDIN_OR_REMOVE]
 
-Built using Google Antigravity (agent orchestration + runtime) and Claude Code (frontend UI acceleration). All agent traces and tool calls are Antigravity-native.
 
 ---
 
