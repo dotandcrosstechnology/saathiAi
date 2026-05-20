@@ -45,3 +45,150 @@ When the top-ranked provider becomes unavailable mid-booking, the orchestrator a
 ---
 
 ## 🏗️ Architecture
+┌─────────────────────────────────────────────────────────────┐
+│              REACT NATIVE (EXPO) MOBILE APP                 │
+│  Auth · Chat · Bookings Tab · Profile Tab · Trace Viewer    │
+└──────────────────────┬──────────────────────────────────────┘
+│
+▼
+┌─────────────────────────────────────────────────────────────┐
+│         GOOGLE ANTIGRAVITY  (Orchestration Layer)           │
+│                                                             │
+│   [Workplan] ──▶ [Tasks Plan] ──▶ [Agent Traces & Logs]     │
+│                                                             │
+│   ┌──────────┐  ┌──────────┐  ┌──────────┐                  │
+│   │ Intent   │─▶│Discovery │─▶│ Ranking  │                  │
+│   └──────────┘  └──────────┘  └────┬─────┘                  │
+│                                    ▼                        │
+│                              ┌──────────┐  ┌──────────┐     │
+│                              │ Booking  │─▶│Follow-up │     │
+│                              └──────────┘  └──────────┘     │
+└────────┬────────────────────────┬──────────────┬────────────┘
+▼                        ▼              ▼
+┌────────────┐         ┌──────────────┐  ┌──────────┐
+│ Gemini API │         │ Firestore    │  │ Expo     │
+│ + Groq     │         │ Auth + DB    │  │ Notifs   │
+│ (fallback) │         │              │  │          │
+└────────────┘         └──────────────┘  └──────────┘
+
+---
+
+## 🚀 How Google Antigravity Is Used
+
+Antigravity is the brain of SaathiAI — not a wrapper:
+
+- **Workplan & Tasks Plan** — generated per user request, decomposing the goal into agent dispatches
+- **Five agents** — each registered with its own prompt, input/output schema, and toolset
+- **Tool routing** — Firestore reads/writes, LLM calls, and notifications all routed through Antigravity's tool interface
+- **Agent traces** — reasoning string, tool inputs, and tool outputs persisted at every step
+- **Visible reasoning** — the mobile app surfaces each agent's `thought` and `decision` as "agent thinking" bubbles in the chat UI, making the agentic workflow visible to the user
+
+Trace exports for the three demo scenarios are in `/traces/submission/`.
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Orchestration | Google Antigravity |
+| Reasoning model (primary) | Gemini 2.5 Flash |
+| Reasoning model (fallback) | Groq Llama 3.3 70B |
+| Mobile framework | React Native (Expo SDK 50+) |
+| Authentication | Firebase Auth (email/password) |
+| Database | Firebase Firestore |
+| Notifications | Expo Notifications |
+| Language | TypeScript |
+
+### Why a multi-provider LLM layer?
+The `src/services/llm.ts` abstraction tries Gemini first (preserving the Google ecosystem story), falls back to Groq on quota/rate-limit errors, and caches demo phrases for guaranteed offline behavior. Every reasoning step records which provider was used.
+
+---
+
+## 📋 Demo Scenarios
+
+Three end-to-end scenarios are documented as runtime traces in `/traces/submission/`:
+
+### 1. Happy Path — `traces/submission/happy_path.json`
+**Input:** *"Mujhe kal subah G-13 mein AC technician chahiye"*
+**Outcome:** All 5 agents execute. Books Ali AC Services at 10:00 AM with Roman Urdu justification.
+
+### 2. Fallback — `traces/submission/fallback.json` (The Agentic Moment)
+**Input:** Same as above, but top provider unavailable.
+**Outcome:** Agent autonomously re-ranks, generates a Roman Urdu explanation, suggests Hamza Cooling Solutions, books on user confirmation.
+
+### 3. Emergency — `traces/submission/emergency.json`
+**Input:** *"yaar urgent plumber chahye, paani leak ho raha hai"*
+**Outcome:** Agent detects emergency urgency, requests location clarification, then books a Lahore plumber.
+
+---
+
+## ⚙️ Setup Instructions
+
+### Prerequisites
+- Node.js 18+
+- Expo CLI
+- A Firebase project (Firestore, Auth, Cloud Messaging enabled)
+- Gemini API key (Google AI Studio)
+- Groq API key (console.groq.com) — for fallback path
+
+### Steps
+
+```bash
+git clone https://github.com/dotandcrosstechnology/saathiAi.git
+cd saathiAi
+npm install
+cp .env.example .env
+# Fill in your API keys in .env
+
+# Seed Firestore with 30 mock providers across Islamabad, Lahore, Karachi
+npm run seed
+
+# Start the dev server
+npx expo start
+```
+
+Scan the QR code with **Expo Go** on Android, or install the APK from the download link above.
+
+### Environment Variables
+
+See `.env.example` for the complete list. All keys are required except `EXPO_PUBLIC_GOOGLE_MAPS_API_KEY` (we use Firestore as the primary discovery source).
+
+---
+
+## 🧪 Testing the Agent Pipeline
+
+```bash
+npm run test:intent          # Intent Agent against 20 Roman Urdu test phrases
+npm run test:e2e             # Full pipeline, happy path
+npm run test:e2e:fallback    # Fallback scenario
+```
+
+Each test script writes a trace to `/traces/` for inspection.
+
+---
+
+## 📦 Submission Deliverables Map
+
+| # | Required | Location |
+|---|----------|----------|
+| 1 | Mobile App APK | Google Drive link above |
+| 2 | GitHub Repository | This repo |
+| 3 | Demo Video (3-5 min) | YouTube link above |
+| 4 | Antigravity Usage Video (2-3 min) | YouTube link above |
+| 5 | README / Documentation | This file |
+| 6 | Antigravity Traces (zip) | Google Drive link above |
+
+---
+
+## 👤 Solo Build
+
+Built end-to-end by **[YOUR NAME HERE]**
+- Email: [YOUR_EMAIL]
+- LinkedIn: [YOUR_LINKEDIN_OR_REMOVE]
+
+Built using Google Antigravity (agent orchestration + runtime) and Claude Code (frontend UI acceleration). All agent traces and tool calls are Antigravity-native.
+
+---
+
+
