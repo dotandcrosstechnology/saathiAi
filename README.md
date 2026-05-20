@@ -11,7 +11,7 @@ The system is orchestrated entirely on **Google Antigravity**, with five special
 ## 📱 Quick Links
 
 - 🎬 **Demo Video (3-5 min):** [PASTE_YOUTUBE_OR_DRIVE_LINK_HERE]
-- 🛠️ **Antigravity Usage Video (2-3 min):** [PASTE_YOUTUBE_OR_DRIVE_LINK_HERE]
+- 🛠️ **Antigravity Usage Video (2-3 min):** https://www.loom.com/share/d1d7e17337614c578d4d3d90b6e5c715
 - 📥 **APK Download:** [PASTE_GOOGLE_DRIVE_LINK_HERE]
 - 🗂️ **Antigravity Traces (zipped):** [PASTE_GOOGLE_DRIVE_LINK_HERE]
 
