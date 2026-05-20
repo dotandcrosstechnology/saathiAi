@@ -65,6 +65,7 @@ export interface Booking {
     | 'completed'
     | 'cancelled';
   created_at: string;
+  cancelled_at?: string;
   receipt_data: Record<string, unknown>;
 }
 
@@ -79,6 +80,7 @@ export interface ReasoningStep {
   tool_input: Record<string, unknown> | null;
   tool_output: Record<string, unknown> | null;
   decision: string;
+  llm_provider?: 'gemini' | 'groq' | 'cache';
 }
 
 /**
@@ -92,4 +94,13 @@ export interface AgentTrace {
   completed_at: string | null;
   steps: ReasoningStep[];
   final_outcome: Record<string, unknown> | null;
+}
+
+/**
+ * A scheduled followup task for a booking.
+ */
+export interface ScheduledTask {
+  task_type: 'reminder' | 'arrival_check' | 'completion_check';
+  scheduled_for_iso: string;
+  message: string;
 }

@@ -1,0 +1,268 @@
+{
+  "trace_id": "tr_vfy4tm30nw",
+  "user_request": "Mujhe kal subah G-13 mein AC technician chahiye",
+  "started_at": "2026-05-19T11:00:42.605Z",
+  "completed_at": "2026-05-19T11:00:57.555Z",
+  "steps": [
+    {
+      "agent": "IntentAgent (Fallback)",
+      "timestamp": "2026-05-19T11:00:48.001Z",
+      "thought": "Fallback intent used because API failed.",
+      "tool_called": null,
+      "tool_input": null,
+      "tool_output": {
+        "service_type": "ac_technician",
+        "sub_type": null,
+        "location": {
+          "city": "Islamabad",
+          "area": "G-13",
+          "confidence": "high"
+        },
+        "time_window": {
+          "start_iso": "2026-05-17T06:00:00+05:00",
+          "end_iso": "2026-05-17T11:59:59+05:00",
+          "interpretation": "kal subah"
+        },
+        "urgency": "normal",
+        "language_detected": "roman_urdu",
+        "constraints": [],
+        "needs_clarification": false,
+        "clarification_question": null,
+        "reasoning": "Mock reasoning due to missing API key."
+      },
+      "decision": "Used fallback intent."
+    },
+    {
+      "agent": "DiscoveryAgent",
+      "timestamp": "2026-05-19T11:00:48.002Z",
+      "thought": "Filtering providers for ac_technician in Islamabad (G-13) within time window.",
+      "tool_called": "firestore.query",
+      "tool_input": {
+        "service_type": "ac_technician",
+        "location": {
+          "city": "Islamabad",
+          "area": "G-13",
+          "confidence": "high"
+        },
+        "time_window": {
+          "start_iso": "2026-05-17T06:00:00+05:00",
+          "end_iso": "2026-05-17T11:59:59+05:00",
+          "interpretation": "kal subah"
+        }
+      },
+      "tool_output": {
+        "initialCount": 10,
+        "cityFilteredCount": 4,
+        "distanceFilteredCount": 3,
+        "timeFilteredCount": 3,
+        "finalCount": 3
+      },
+      "decision": "Found 3 eligible candidates within 10km and available time."
+    },
+    {
+      "agent": "RankingAgent",
+      "timestamp": "2026-05-19T11:00:50.532Z",
+      "thought": "Calculated score based on distance, rating, availability, jobs, and price.",
+      "tool_called": "gemini.generateJustification",
+      "tool_input": {
+        "top_choice_name": "Ali AC Services",
+        "language": "roman_urdu"
+      },
+      "tool_output": {
+        "scored_candidates": [
+          {
+            "id": "prov_001",
+            "score": 0.9775,
+            "breakdown": {
+              "dist_score": 0.35,
+              "rating_score": 0.24,
+              "avail_weighted": 0.2,
+              "jobs_score": 0.1,
+              "price_score": 0.08750000000000001
+            }
+          },
+          {
+            "id": "prov_002",
+            "score": 0.9675214111507264,
+            "breakdown": {
+              "dist_score": 0.3425214111507265,
+              "rating_score": 0.225,
+              "avail_weighted": 0.2,
+              "jobs_score": 0.1,
+              "price_score": 0.1
+            }
+          },
+          {
+            "id": "prov_003",
+            "score": 0.7143161758284919,
+            "breakdown": {
+              "dist_score": 0.10756617582849197,
+              "rating_score": 0.215,
+              "avail_weighted": 0.2,
+              "jobs_score": 0.098,
+              "price_score": 0.09375
+            }
+          }
+        ],
+        "justification": "Best matched provider based on location and rating."
+      },
+      "decision": "Ranked 3 providers. Top choice is Ali AC Services with score 0.978."
+    },
+    {
+      "agent": "RankingAgent (re-run)",
+      "timestamp": "2026-05-19T11:00:52.349Z",
+      "thought": "Top choice unavailable, autonomously re-evaluating remaining candidates",
+      "tool_called": "internal.rerank",
+      "tool_input": {
+        "original_top": "prov_001"
+      },
+      "tool_output": null,
+      "decision": "Re-ranking with Ali AC Services excluded"
+    },
+    {
+      "agent": "FallbackAgent",
+      "timestamp": "2026-05-19T11:00:54.971Z",
+      "thought": "Ali AC Services abhi book ho gaya. Main aapko Hamza Cooling Solutions suggest kar raha hoon — 4.6 rating, available kal subah.",
+      "tool_called": "gemini.generateExplanation",
+      "tool_input": {
+        "lost": "Ali AC Services",
+        "new": "Hamza Cooling Solutions"
+      },
+      "tool_output": {
+        "explanation": "Ali AC Services abhi book ho gaya. Main aapko Hamza Cooling Solutions suggest kar raha hoon — 4.6 rating, available kal subah."
+      },
+      "decision": "Suggesting Hamza Cooling Solutions as fallback"
+    },
+    {
+      "agent": "BookingAgent",
+      "timestamp": "2026-05-19T11:00:54.971Z",
+      "thought": "Selected best available slot, generated booking, updated provider availability, triggered confirmation notification.",
+      "tool_called": "firestore.writeTransaction",
+      "tool_input": {
+        "booking_data": {
+          "booking_id": "bk_cp8cl4403u",
+          "user_id": "demo_user",
+          "provider_id": "prov_002",
+          "service_type": "ac_technician",
+          "scheduled_iso": "2026-05-17T11:00:00+05:00",
+          "status": "confirmed",
+          "created_at": "2026-05-19T11:00:54.971Z",
+          "receipt_data": {
+            "provider_name": "Hamza Cooling Solutions",
+            "service": "ac_technician",
+            "time": "2026-05-17T11:00:00+05:00",
+            "price": 1600,
+            "booking_id": "bk_cp8cl4403u",
+            "generated_at": "2026-05-19T11:00:54.971Z"
+          }
+        },
+        "provider_id": "prov_002",
+        "slot_to_remove": "2026-05-17T11:00:00+05:00"
+      },
+      "tool_output": {
+        "firestore_state": {
+          "provider_available_slots_BEFORE": [
+            "2026-05-17T11:00:00+05:00",
+            "2026-05-17T15:00:00+05:00",
+            "2026-05-18T10:00:00+05:00",
+            "2026-05-18T17:00:00+05:00",
+            "2026-05-19T09:00:00+05:00"
+          ],
+          "provider_available_slots_AFTER": [
+            "2026-05-17T15:00:00+05:00",
+            "2026-05-18T10:00:00+05:00",
+            "2026-05-18T17:00:00+05:00",
+            "2026-05-19T09:00:00+05:00"
+          ],
+          "new_booking_document": {
+            "booking_id": "bk_cp8cl4403u",
+            "user_id": "demo_user",
+            "provider_id": "prov_002",
+            "service_type": "ac_technician",
+            "scheduled_iso": "2026-05-17T11:00:00+05:00",
+            "status": "confirmed",
+            "created_at": "2026-05-19T11:00:54.971Z",
+            "receipt_data": {
+              "provider_name": "Hamza Cooling Solutions",
+              "service": "ac_technician",
+              "time": "2026-05-17T11:00:00+05:00",
+              "price": 1600,
+              "booking_id": "bk_cp8cl4403u",
+              "generated_at": "2026-05-19T11:00:54.971Z"
+            }
+          }
+        }
+      },
+      "decision": "Created booking bk_cp8cl4403u for Hamza Cooling Solutions at 2026-05-17T11:00:00+05:00."
+    },
+    {
+      "agent": "FollowupAgent",
+      "timestamp": "2026-05-19T11:00:56.196Z",
+      "thought": "Scheduled reminder, arrival check, and completion check notifications based on appointment time.",
+      "tool_called": "expo.scheduleNotificationAsync & firestore.setDoc",
+      "tool_input": {
+        "booking_id": "bk_cp8cl4403u",
+        "appointment_time": "2026-05-17T11:00:00+05:00"
+      },
+      "tool_output": {
+        "scheduled_tasks": [
+          {
+            "task_type": "reminder",
+            "scheduled_for_iso": "2026-05-17T05:00:00.000Z",
+            "message": "Reminder: Your ac_technician appointment is in 1 hour."
+          },
+          {
+            "task_type": "arrival_check",
+            "scheduled_for_iso": "2026-05-17T06:00:00.000Z",
+            "message": "Has your ac_technician arrived?"
+          },
+          {
+            "task_type": "completion_check",
+            "scheduled_for_iso": "2026-05-17T07:30:00.000Z",
+            "message": "Is the job completed? Please rate your experience."
+          }
+        ]
+      },
+      "decision": "Successfully registered 3 followup tasks for booking bk_cp8cl4403u."
+    }
+  ],
+  "final_outcome": {
+    "booking": {
+      "booking_id": "bk_cp8cl4403u",
+      "user_id": "demo_user",
+      "provider_id": "prov_002",
+      "service_type": "ac_technician",
+      "scheduled_iso": "2026-05-17T11:00:00+05:00",
+      "status": "confirmed",
+      "created_at": "2026-05-19T11:00:54.971Z",
+      "receipt_data": {
+        "provider_name": "Hamza Cooling Solutions",
+        "service": "ac_technician",
+        "time": "2026-05-17T11:00:00+05:00",
+        "price": 1600,
+        "booking_id": "bk_cp8cl4403u",
+        "generated_at": "2026-05-19T11:00:54.971Z"
+      }
+    },
+    "scheduled": [
+      {
+        "task_type": "reminder",
+        "scheduled_for_iso": "2026-05-17T05:00:00.000Z",
+        "message": "Reminder: Your ac_technician appointment is in 1 hour."
+      },
+      {
+        "task_type": "arrival_check",
+        "scheduled_for_iso": "2026-05-17T06:00:00.000Z",
+        "message": "Has your ac_technician arrived?"
+      },
+      {
+        "task_type": "completion_check",
+        "scheduled_for_iso": "2026-05-17T07:30:00.000Z",
+        "message": "Is the job completed? Please rate your experience."
+      }
+    ],
+    "top_choice_name": "Hamza Cooling Solutions",
+    "fallback_used": true,
+    "fallback_msg": "Ali AC Services abhi book ho gaya. Main aapko Hamza Cooling Solutions suggest kar raha hoon — 4.6 rating, available kal subah."
+  }
+}

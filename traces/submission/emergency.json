@@ -1,0 +1,264 @@
+{
+  "trace_id": "tr_tlvgg4fjmej",
+  "user_request": "Gulberg, Lahore",
+  "started_at": "2026-05-19T11:48:31.377Z",
+  "completed_at": "2026-05-19T11:48:34.784Z",
+  "steps": [
+    {
+      "agent": "IntentAgent (Fallback)",
+      "timestamp": "2026-05-19T11:48:31.376Z",
+      "thought": "Fallback intent used because API failed.",
+      "tool_called": null,
+      "tool_input": null,
+      "tool_output": {
+        "service_type": "plumber",
+        "sub_type": null,
+        "location": {
+          "city": null,
+          "area": null,
+          "confidence": "none"
+        },
+        "time_window": {
+          "start_iso": "2026-05-17T06:00:00+05:00",
+          "end_iso": "2026-05-17T11:59:59+05:00",
+          "interpretation": "kal subah"
+        },
+        "urgency": "emergency",
+        "language_detected": "roman_urdu",
+        "constraints": [
+          "water_leak_active"
+        ],
+        "needs_clarification": true,
+        "clarification_question": "Bhai area konsa hai aapka (City/Area)?",
+        "reasoning": "Mock reasoning due to missing API key."
+      },
+      "decision": "Used fallback intent."
+    },
+    {
+      "agent": "IntentAgent (Enriched Fallback)",
+      "timestamp": "2026-05-19T11:48:31.695Z",
+      "thought": "Fallback intent used because API failed.",
+      "tool_called": null,
+      "tool_input": null,
+      "tool_output": {
+        "service_type": "plumber",
+        "sub_type": null,
+        "location": {
+          "city": "Lahore",
+          "area": "Gulberg",
+          "confidence": "high"
+        },
+        "time_window": {
+          "start_iso": "2026-05-17T06:00:00+05:00",
+          "end_iso": "2026-05-17T11:59:59+05:00",
+          "interpretation": "kal subah"
+        },
+        "urgency": "emergency",
+        "language_detected": "roman_urdu",
+        "constraints": [
+          "water_leak_active"
+        ],
+        "needs_clarification": false,
+        "clarification_question": null,
+        "reasoning": "Mock reasoning due to missing API key."
+      },
+      "decision": "Used fallback intent."
+    },
+    {
+      "agent": "DiscoveryAgent",
+      "timestamp": "2026-05-19T11:48:31.696Z",
+      "thought": "Filtering providers for plumber in Gulberg, Lahore within time window.",
+      "tool_called": "firestore.query",
+      "tool_input": {
+        "service_type": "plumber",
+        "location": {
+          "city": "Lahore",
+          "area": "Gulberg",
+          "confidence": "high"
+        },
+        "time_window": {
+          "start_iso": "2026-05-17T06:00:00+05:00",
+          "end_iso": "2026-05-17T11:59:59+05:00",
+          "interpretation": "kal subah"
+        }
+      },
+      "tool_output": {
+        "initialCount": 10,
+        "cityFilteredCount": 3,
+        "distanceFilteredCount": 3,
+        "timeFilteredCount": 2,
+        "finalCount": 2
+      },
+      "decision": "Found 2 eligible candidates within 10km and available time."
+    },
+    {
+      "agent": "RankingAgent",
+      "timestamp": "2026-05-19T11:48:32.751Z",
+      "thought": "Calculated score based on distance, rating, availability, jobs, and price.",
+      "tool_called": "gemini.generateJustification",
+      "tool_input": {
+        "top_choice_name": "Ahmed Drainage Expert",
+        "language": "roman_urdu"
+      },
+      "tool_output": {
+        "scored_candidates": [
+          {
+            "id": "prov_027",
+            "score": 0.6996407516465489,
+            "breakdown": {
+              "dist_score": 0.07964075164654892,
+              "rating_score": 0.22000000000000003,
+              "avail_weighted": 0.2,
+              "jobs_score": 0.1,
+              "price_score": 0.1
+            }
+          },
+          {
+            "id": "prov_026",
+            "score": 0.552657257018365,
+            "breakdown": {
+              "dist_score": 0.011085828446936412,
+              "rating_score": 0.2,
+              "avail_weighted": 0.2,
+              "jobs_score": 0.063,
+              "price_score": 0.07857142857142857
+            }
+          }
+        ],
+        "justification": "Best matched provider based on location and rating."
+      },
+      "decision": "Ranked 2 providers. Top choice is Ahmed Drainage Expert with score 0.700."
+    },
+    {
+      "agent": "BookingAgent",
+      "timestamp": "2026-05-19T11:48:32.992Z",
+      "thought": "Selected best available slot, generated booking, updated provider availability, triggered confirmation notification.",
+      "tool_called": "firestore.writeTransaction",
+      "tool_input": {
+        "booking_data": {
+          "booking_id": "bk_c1egncielg",
+          "user_id": "demo_user",
+          "provider_id": "prov_027",
+          "service_type": "plumber",
+          "scheduled_iso": "2026-05-17T08:00:00+05:00",
+          "status": "confirmed",
+          "created_at": "2026-05-19T11:48:32.992Z",
+          "receipt_data": {
+            "provider_name": "Ahmed Drainage Expert",
+            "service": "plumber",
+            "time": "2026-05-17T08:00:00+05:00",
+            "price": 1400,
+            "booking_id": "bk_c1egncielg",
+            "generated_at": "2026-05-19T11:48:32.992Z"
+          }
+        },
+        "provider_id": "prov_027",
+        "slot_to_remove": "2026-05-17T08:00:00+05:00"
+      },
+      "tool_output": {
+        "firestore_state": {
+          "provider_available_slots_BEFORE": [
+            "2026-05-17T08:00:00+05:00",
+            "2026-05-17T13:00:00+05:00",
+            "2026-05-18T10:00:00+05:00",
+            "2026-05-18T16:00:00+05:00",
+            "2026-05-19T12:00:00+05:00"
+          ],
+          "provider_available_slots_AFTER": [
+            "2026-05-17T13:00:00+05:00",
+            "2026-05-18T10:00:00+05:00",
+            "2026-05-18T16:00:00+05:00",
+            "2026-05-19T12:00:00+05:00"
+          ],
+          "new_booking_document": {
+            "booking_id": "bk_c1egncielg",
+            "user_id": "demo_user",
+            "provider_id": "prov_027",
+            "service_type": "plumber",
+            "scheduled_iso": "2026-05-17T08:00:00+05:00",
+            "status": "confirmed",
+            "created_at": "2026-05-19T11:48:32.992Z",
+            "receipt_data": {
+              "provider_name": "Ahmed Drainage Expert",
+              "service": "plumber",
+              "time": "2026-05-17T08:00:00+05:00",
+              "price": 1400,
+              "booking_id": "bk_c1egncielg",
+              "generated_at": "2026-05-19T11:48:32.992Z"
+            }
+          }
+        }
+      },
+      "decision": "Created booking bk_c1egncielg for Ahmed Drainage Expert at 2026-05-17T08:00:00+05:00."
+    },
+    {
+      "agent": "FollowupAgent",
+      "timestamp": "2026-05-19T11:48:33.905Z",
+      "thought": "Scheduled reminder, arrival check, and completion check notifications based on appointment time.",
+      "tool_called": "expo.scheduleNotificationAsync & firestore.setDoc",
+      "tool_input": {
+        "booking_id": "bk_c1egncielg",
+        "appointment_time": "2026-05-17T08:00:00+05:00"
+      },
+      "tool_output": {
+        "scheduled_tasks": [
+          {
+            "task_type": "reminder",
+            "scheduled_for_iso": "2026-05-17T02:00:00.000Z",
+            "message": "Reminder: Your plumber appointment is in 1 hour."
+          },
+          {
+            "task_type": "arrival_check",
+            "scheduled_for_iso": "2026-05-17T03:00:00.000Z",
+            "message": "Has your plumber arrived?"
+          },
+          {
+            "task_type": "completion_check",
+            "scheduled_for_iso": "2026-05-17T04:30:00.000Z",
+            "message": "Is the job completed? Please rate your experience."
+          }
+        ]
+      },
+      "decision": "Successfully registered 3 followup tasks for booking bk_c1egncielg."
+    }
+  ],
+  "final_outcome": {
+    "booking": {
+      "booking_id": "bk_c1egncielg",
+      "user_id": "demo_user",
+      "provider_id": "prov_027",
+      "service_type": "plumber",
+      "scheduled_iso": "2026-05-17T08:00:00+05:00",
+      "status": "confirmed",
+      "created_at": "2026-05-19T11:48:32.992Z",
+      "receipt_data": {
+        "provider_name": "Ahmed Drainage Expert",
+        "service": "plumber",
+        "time": "2026-05-17T08:00:00+05:00",
+        "price": 1400,
+        "booking_id": "bk_c1egncielg",
+        "generated_at": "2026-05-19T11:48:32.992Z"
+      }
+    },
+    "scheduled": [
+      {
+        "task_type": "reminder",
+        "scheduled_for_iso": "2026-05-17T02:00:00.000Z",
+        "message": "Reminder: Your plumber appointment is in 1 hour."
+      },
+      {
+        "task_type": "arrival_check",
+        "scheduled_for_iso": "2026-05-17T03:00:00.000Z",
+        "message": "Has your plumber arrived?"
+      },
+      {
+        "task_type": "completion_check",
+        "scheduled_for_iso": "2026-05-17T04:30:00.000Z",
+        "message": "Is the job completed? Please rate your experience."
+      }
+    ],
+    "top_choice_name": "Ahmed Drainage Expert",
+    "fallback_used": false,
+    "fallback_msg": null
+  }
+}

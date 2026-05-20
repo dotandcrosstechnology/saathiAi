@@ -1,0 +1,133 @@
+{
+  "test_run_at": "2026-05-16T08:40:48.793Z",
+  "phrase": "Mujhe kal subah G-13 mein AC technician chahiye",
+  "steps": [
+    {
+      "agent": "IntentAgent",
+      "timestamp": "2026-05-16T08:40:44.762Z",
+      "thought": "Fallback intent because Gemini failed.",
+      "tool_called": null,
+      "tool_input": null,
+      "tool_output": {
+        "service_type": "ac_technician",
+        "sub_type": null,
+        "location": {
+          "city": "Islamabad",
+          "area": "G-13",
+          "confidence": "high"
+        },
+        "time_window": {
+          "start_iso": "2026-05-17T06:00:00+05:00",
+          "end_iso": "2026-05-17T11:59:59+05:00",
+          "interpretation": "kal subah"
+        },
+        "urgency": "normal",
+        "language_detected": "roman_urdu",
+        "constraints": [],
+        "needs_clarification": false,
+        "clarification_question": null,
+        "reasoning": "Mock reasoning due to missing API key."
+      },
+      "decision": "Used fallback intent for testing."
+    },
+    {
+      "agent": "DiscoveryAgent",
+      "timestamp": "2026-05-16T08:40:44.763Z",
+      "thought": "Filtering providers for ac_technician in Islamabad (G-13) within time window.",
+      "tool_called": "firestore.query",
+      "tool_input": {
+        "service_type": "ac_technician",
+        "location": {
+          "city": "Islamabad",
+          "area": "G-13",
+          "confidence": "high"
+        },
+        "time_window": {
+          "start_iso": "2026-05-17T06:00:00+05:00",
+          "end_iso": "2026-05-17T11:59:59+05:00",
+          "interpretation": "kal subah"
+        }
+      },
+      "tool_output": {
+        "initialCount": 10,
+        "cityFilteredCount": 4,
+        "distanceFilteredCount": 3,
+        "timeFilteredCount": 3,
+        "finalCount": 3
+      },
+      "decision": "Found 3 eligible candidates within 10km and available time."
+    },
+    {
+      "agent": "RankingAgent",
+      "timestamp": "2026-05-16T08:40:48.734Z",
+      "thought": "Calculated score based on distance, rating, availability, jobs, and price.",
+      "tool_called": "gemini.generateJustification",
+      "tool_input": {
+        "top_choice_name": "Ali AC Services",
+        "language": "roman_urdu"
+      },
+      "tool_output": {
+        "scored_candidates": [
+          {
+            "id": "prov_001",
+            "score": 0.9775,
+            "breakdown": {
+              "dist_score": 0.35,
+              "rating_score": 0.24,
+              "avail_weighted": 0.2,
+              "jobs_score": 0.1,
+              "price_score": 0.08750000000000001
+            }
+          },
+          {
+            "id": "prov_002",
+            "score": 0.9675214111507264,
+            "breakdown": {
+              "dist_score": 0.3425214111507265,
+              "rating_score": 0.225,
+              "avail_weighted": 0.2,
+              "jobs_score": 0.1,
+              "price_score": 0.1
+            }
+          },
+          {
+            "id": "prov_003",
+            "score": 0.7143161758284919,
+            "breakdown": {
+              "dist_score": 0.10756617582849197,
+              "rating_score": 0.215,
+              "avail_weighted": 0.2,
+              "jobs_score": 0.098,
+              "price_score": 0.09375
+            }
+          }
+        ],
+        "justification": "Best matched provider based on location and rating."
+      },
+      "decision": "Ranked 3 providers. Top choice is Ali AC Services with score 0.978."
+    }
+  ],
+  "final_outcome": {
+    "provider_id": "prov_001",
+    "name": "Ali AC Services",
+    "service_type": "ac_technician",
+    "city": "Islamabad",
+    "area": "G-13",
+    "lat": 33.6499,
+    "lng": 72.9638,
+    "rating": 4.8,
+    "jobs_completed": 210,
+    "hourly_rate_pkr": 1800,
+    "phone": "+92-300-1234567",
+    "verified": true,
+    "available_slots": [
+      "2026-05-17T10:00:00+05:00",
+      "2026-05-17T14:00:00+05:00",
+      "2026-05-18T09:00:00+05:00",
+      "2026-05-18T16:00:00+05:00",
+      "2026-05-19T11:00:00+05:00"
+    ],
+    "score": 0.9775,
+    "justification": "Best matched provider based on location and rating."
+  }
+}

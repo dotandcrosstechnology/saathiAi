@@ -1,0 +1,409 @@
+{
+  "test_run_at": "2026-05-16T08:35:33.634Z",
+  "total": 20,
+  "passed": 0,
+  "failed": 20,
+  "results": [
+    {
+      "idx": 1,
+      "phrase": "Mujhe kal subah G-13 mein AC technician chahiye",
+      "expected": {
+        "service_type": "ac_technician",
+        "city": "Islamabad",
+        "area": "G-13",
+        "urgency": "normal",
+        "language_detected": "roman_urdu"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 2,
+      "phrase": "yaar urgent plumber chahye, paani leak ho raha hai",
+      "expected": {
+        "service_type": "plumber",
+        "city": null,
+        "area": null,
+        "urgency": "emergency",
+        "language_detected": "roman_urdu"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 3,
+      "phrase": "Need an electrician in F-10 tomorrow morning",
+      "expected": {
+        "service_type": "electrician",
+        "city": "Islamabad",
+        "area": "F-10",
+        "urgency": "normal",
+        "language_detected": "english"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 4,
+      "phrase": "AC technician aaj sham ko Gulberg mein",
+      "expected": {
+        "service_type": "ac_technician",
+        "city": "Lahore",
+        "area": "Gulberg",
+        "urgency": "normal",
+        "language_detected": "roman_urdu"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 5,
+      "phrase": "Electrician kab milay ga? main switch board phat gaya hai",
+      "expected": {
+        "service_type": "electrician",
+        "city": null,
+        "area": null,
+        "urgency": "emergency",
+        "language_detected": "mixed"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 6,
+      "phrase": "Clifton mein plumber chahiye, kitchen ka nalkaa kharab hai",
+      "expected": {
+        "service_type": "plumber",
+        "city": "Karachi",
+        "area": "Clifton",
+        "urgency": "normal",
+        "language_detected": "roman_urdu"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 7,
+      "phrase": "Looking for an AC repair guy in DHA Karachi, anytime this week",
+      "expected": {
+        "service_type": "ac_technician",
+        "city": "Karachi",
+        "area": "DHA",
+        "urgency": "flexible",
+        "language_detected": "english"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 8,
+      "phrase": "I-8 mein bijli chali gayi, abhi electrician bhejo",
+      "expected": {
+        "service_type": "electrician",
+        "city": "Islamabad",
+        "area": "I-8",
+        "urgency": "emergency",
+        "language_detected": "roman_urdu"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 9,
+      "phrase": "DHA Lahore mein plumber tomorrow 2pm, pipe burst ho gaya",
+      "expected": {
+        "service_type": "plumber",
+        "city": "Lahore",
+        "area": "DHA",
+        "urgency": "high",
+        "language_detected": "mixed"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 10,
+      "phrase": "AC ki gas bharwani hai, F-11 Islamabad, parson chalega",
+      "expected": {
+        "service_type": "ac_technician",
+        "city": "Islamabad",
+        "area": "F-11",
+        "urgency": "flexible",
+        "language_detected": "roman_urdu"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 11,
+      "phrase": "I need someone to fix my wiring in Lahore",
+      "expected": {
+        "service_type": "electrician",
+        "city": "Lahore",
+        "area": null,
+        "urgency": "normal",
+        "language_detected": "english"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 12,
+      "phrase": "G-13 mein ghar mein paani bhar gaya hai, plumber foran chahiye!",
+      "expected": {
+        "service_type": "plumber",
+        "city": "Islamabad",
+        "area": "G-13",
+        "urgency": "emergency",
+        "language_detected": "roman_urdu"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 13,
+      "phrase": "Johar Town mein AC repair karwana hai, koi acha banda bhejo",
+      "expected": {
+        "service_type": "ac_technician",
+        "city": "Lahore",
+        "area": "Johar Town",
+        "urgency": "normal",
+        "language_detected": "roman_urdu"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 14,
+      "phrase": "Urgent plumber needed in Gulshan-e-Iqbal for bathroom leak",
+      "expected": {
+        "service_type": "plumber",
+        "city": "Karachi",
+        "area": "Gulshan-e-Iqbal",
+        "urgency": "high",
+        "language_detected": "english"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 15,
+      "phrase": "Model Town mein electrician chahiye, naya meter lagwana hai",
+      "expected": {
+        "service_type": "electrician",
+        "city": "Lahore",
+        "area": "Model Town",
+        "urgency": "normal",
+        "language_detected": "roman_urdu"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 16,
+      "phrase": "F-10 mein kuch repair kaam hai, kal aa saktay ho?",
+      "expected": {
+        "service_type": "unknown",
+        "city": "Islamabad",
+        "area": "F-10",
+        "urgency": "normal",
+        "language_detected": "mixed"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 17,
+      "phrase": "Raat ko AC band ho gaya Clifton mein, bohat garmi hai, koi bhejo!",
+      "expected": {
+        "service_type": "ac_technician",
+        "city": "Karachi",
+        "area": "Clifton",
+        "urgency": "emergency",
+        "language_detected": "roman_urdu"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 18,
+      "phrase": "Schedule an electrician visit to F-10 Islamabad next Monday at 3pm",
+      "expected": {
+        "service_type": "electrician",
+        "city": "Islamabad",
+        "area": "F-10",
+        "urgency": "normal",
+        "language_detected": "english"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 19,
+      "phrase": "Gulberg mein plumber chahiye lekin sirf verified wala, budget 1500 tak",
+      "expected": {
+        "service_type": "plumber",
+        "city": "Lahore",
+        "area": "Gulberg",
+        "urgency": "normal",
+        "language_detected": "roman_urdu"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    },
+    {
+      "idx": 20,
+      "phrase": "G-13 mein short circuit ho gaya, electrician aur maybe plumber bhi chahiye",
+      "expected": {
+        "service_type": "electrician",
+        "city": "Islamabad",
+        "area": "G-13",
+        "urgency": "high",
+        "language_detected": "mixed"
+      },
+      "actual": {
+        "service_type": "ERROR",
+        "city": null,
+        "area": null,
+        "urgency": "ERROR",
+        "language": "ERROR"
+      },
+      "pass": false,
+      "error": "GEMINI_API_KEY is not set in environment variables"
+    }
+  ],
+  "reasoning_steps": []
+}
